@@ -1,8 +1,231 @@
-<html>
 
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!DOCTYPE html>
+<!-- saved from url=(0036)https://imybo.github.io/S-DCCRN/ -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
 
-  <title>S-DCCRN: Super Wide Band DCCRN with learnable complex feature for speech enhancement</title>
-  <link rel="stylesheet" type="text/css" href="./stylesheets/github-light.css">
-</head>
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>S-DCCRN: Super Wide Band DCCRN with learnable 
+ complex feature for speech enhancement</title>
+<meta name="generator" content="Jekyll v3.9.0">
+<meta property="og:title" content="TODO: title">
+<meta property="og:locale" content="en_US">
+<link rel="canonical" href="https://imybo.github.io/S-DCCRN/">
+<meta property="og:url" content="https://imybo.github.io/S-DCCRN/">
+<meta name="twitter:card" content="summary">
+<!-- End Jekyll SEO tag -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <link rel="stylesheet" href="./S-DCCRN_files/style.css">
+  </head>
+  <body data-new-gr-c-s-check-loaded="14.1001.0" data-gr-ext-installed="">
+    <section class="page-header">
+    <!-- <h1 class="project-name">Demo PAGE</h1> -->
+    <!-- <h2 class="project-tagline"></h2> -->
+      
+      
+    </section>
+
+<section class="main-content">
+      <h1 id=""><center>S-DCCRN: Super Wide Band DCCRN with learnable 
+ complex feature for speech enhancement
+	  </center></h1>
+
+<center> Shubo Lv, Yihui Fu, Mengtao Xing, Jiayao Sun, Lei Xie, Jun Huang, Yannan Wang, Tao Yu</center>
+<center> Audio, Speech and Language Processing Group (ASLP@NPU), Northwestern Polytechnical University, Xi'an, China</center>
+<center> Tencent Ethereal Audio Lab, Tencent Corporation, Shenzhen, China</center>
+
+<h2>0. Contents</h2>
+<ol>
+  <li><a href="https://imybo.github.io/S-DCCRN/#abstract">Abstract</a></li>
+  <li><a href="https://imybo.github.io/S-DCCRN/#musical">Demos -- DNS-2021 blind test (musical)</a></li>
+  <li><a href="https://imybo.github.io/S-DCCRN/#emotional">Demos -- DNS-2021 blind test (emotional)</a></li>
+  <li><a href="https://imybo.github.io/S-DCCRN/#realrec">Demos -- DNS-2021 blind test (real recordings)</a></li>
+</ol>
+
+<br><br>
+<h2 id="abstract">1. Abstract<a name="abstract"></a></h2>
+<p>   In speech enhancement, complex neural network has shown promising performance due to their effectiveness in processing complex-valued spectrum. Most of the recent speech enhancement approaches mainly focus on wide-band signal with a sampling rate of 16K Hz. However, research on super wide band (e.g., 32K Hz) or even full-band (48K) denoising is still lacked due to the difficulty of modeling more frequency bands and particularly high frequency components. In this paper, we extend our previous deep complex convolution recurrent neural network (DCCRN) substantially to a super wide band version -- S-DCCRN, to perform speech denoising on speech of 32K Hz sampling rate. We first employ a cascaded sub-band and full-band processing module, which consists of two small-footprint DCCRNs -- one operates on sub-band signal and one operates on full-band signal, aiming at benefiting from both local and global frequency information. Moreover, instead of simply adopting the STFT feature as input, we use a complex feature encoder trained in an end-to-end manner to refine the information of different frequency bands. We also use a complex feature decoder to revert the feature to time-frequency domain. Finally, a learnable spectrum compression method is adopted to adjust the energy of different frequency bands, which is beneficial for neural network learning. The proposed model, S-DCCRN, has surpassed PercepNet as well as several competitive models and achieves state-of-the-art performance in terms of speech quality and intelligibility. Ablation studies also demonstrate the effectiveness of different contributions. 
+</p>
+	<center><img src="./S-DCCRN_files/net.png"></center>
+  <table frame="void" rules="none"><tbody><tr>
+    <td><img src="./S-DCCRN_files/subdccrn.png" border="0"></td>
+    <td><img src="./S-DCCRN_files/cfe_cfd.png" border="0"></td>
+    <td><img src="./S-DCCRN_files/groupconv.png" border="0"></td>
+    </tr></tbody></table>
+<br><br>
+
+<h2>2. Demos -- DNS-2021 blind test (musical)<a name="musical"></a></h2>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Models</strong></th>
+      <th style="text-align: center"><strong>Sample 1</strong></th>
+      <th style="text-align: center"><strong>Sample 2</strong></th>
+      <th style="text-align: center"><strong>Sample 3</strong></th>
+      <th style="text-align: center"><strong>Sample 4</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Noisy</td>
+      <td style="text-align: left"><audio src="samples/noisy/musical/ms_realrec_musical_laptop_microphone_A2UTUL6ZW905WI_saxophone_far_fileid_9.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/noisy/musical/ms_realrec_musical_laptopSpeaker_A3P4XZJM2DEATZ_guitar_near_6.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/noisy/musical/ms_realrec_musical_laptop_microphone_A2UTUL6ZW905WI_guitar_far_fileid_3.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/noisy/musical/ms_realrec_musical_laptop_microphone_A2UTUL6ZW905WI_drums_near_fileid_8.wav" controls="" preload=""></audio></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">RNNoise</td>
+      <td style="text-align: left"><audio src="samples/rnnoise/musical/ms_realrec_musical_laptop_microphone_A2UTUL6ZW905WI_saxophone_far_fileid_9.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/rnnoise/musical/ms_realrec_musical_laptopSpeaker_A3P4XZJM2DEATZ_guitar_near_6.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/rnnoise/musical/ms_realrec_musical_laptop_microphone_A2UTUL6ZW905WI_guitar_far_fileid_3.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/rnnoise/musical/ms_realrec_musical_laptop_microphone_A2UTUL6ZW905WI_drums_near_fileid_8.wav" controls="" preload=""></audio></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">DCCRN</td>
+      <td style="text-align: left"><audio src="samples/dccrn/musical/ms_realrec_musical_laptop_microphone_A2UTUL6ZW905WI_saxophone_far_fileid_9.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/dccrn/musical/ms_realrec_musical_laptopSpeaker_A3P4XZJM2DEATZ_guitar_near_6.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/dccrn/musical/ms_realrec_musical_laptop_microphone_A2UTUL6ZW905WI_guitar_far_fileid_3.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/dccrn/musical/ms_realrec_musical_laptop_microphone_A2UTUL6ZW905WI_drums_near_fileid_8.wav" controls="" preload=""></audio></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SAF</td>
+      <td style="text-align: left"><audio src="samples/dp_dccrn/musical/ms_realrec_musical_laptop_microphone_A2UTUL6ZW905WI_saxophone_far_fileid_9.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/dp_dccrn/musical/ms_realrec_musical_laptopSpeaker_A3P4XZJM2DEATZ_guitar_near_6.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/dp_dccrn/musical/ms_realrec_musical_laptop_microphone_A2UTUL6ZW905WI_guitar_far_fileid_3.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/dp_dccrn/musical/ms_realrec_musical_laptop_microphone_A2UTUL6ZW905WI_drums_near_fileid_8.wav" controls="" preload=""></audio></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">S-DCCRN</td>
+      <td style="text-align: left"><audio src="samples/fdnet/musical/ms_realrec_musical_laptop_microphone_A2UTUL6ZW905WI_saxophone_far_fileid_9.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/fdnet/musical/ms_realrec_musical_laptopSpeaker_A3P4XZJM2DEATZ_guitar_near_6.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/fdnet/musical/ms_realrec_musical_laptop_microphone_A2UTUL6ZW905WI_guitar_far_fileid_3.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/fdnet/musical/ms_realrec_musical_laptop_microphone_A2UTUL6ZW905WI_drums_near_fileid_8.wav" controls="" preload=""></audio></td>
+
+    </tr>
+  </tbody>
+</table>
+<br><br>
+
+
+
+<h2>3. Demos -- DNS-2021 blind test (emotional)<a name="emotional"></a></h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Models</strong></th>
+      <th style="text-align: center"><strong>Sample 1</strong></th>
+      <th style="text-align: center"><strong>Sample 2</strong></th>
+      <th style="text-align: center"><strong>Sample 3</strong></th>
+      <th style="text-align: center"><strong>Sample 4</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Noisy</td>
+      <td style="text-align: left"><audio src="samples/noisy/emotional/ms_realrec_emotional_earphone_A25UMKJS7PC293_clatter_near_amazed_fileid_6.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/noisy/emotional/ms_realrec_emotional_headset_A3KSAP865D3L7D_dog_barking_far_shouting_fileid_8.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/noisy/emotional/ms_realrec_emotional_headset_A2Y2RVQO2UVFV1_car_far_Amazed_fileid_8.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/noisy/emotional/ms_realrec_emotional_headset_A1EK8YNHZHTW1J_Kitchen_Vessels_far_Surprised_fileid_10.wav" controls="" preload=""></audio></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">RNNoise</td>
+      <td style="text-align: left"><audio src="samples/rnnoise/emotional/ms_realrec_emotional_earphone_A25UMKJS7PC293_clatter_near_amazed_fileid_6.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/rnnoise/emotional/ms_realrec_emotional_headset_A3KSAP865D3L7D_dog_barking_far_shouting_fileid_8.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/rnnoise/emotional/ms_realrec_emotional_headset_A2Y2RVQO2UVFV1_car_far_Amazed_fileid_8.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/rnnoise/emotional/ms_realrec_emotional_headset_A1EK8YNHZHTW1J_Kitchen_Vessels_far_Surprised_fileid_10.wav" controls="" preload=""></audio></td>
+
+    </tr>
+    <tr>
+      <td style="text-align: left">DCCRN</td>
+      <td style="text-align: left"><audio src="samples/dccrn/emotional/ms_realrec_emotional_earphone_A25UMKJS7PC293_clatter_near_amazed_fileid_6.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/dccrn/emotional/ms_realrec_emotional_headset_A3KSAP865D3L7D_dog_barking_far_shouting_fileid_8.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/dccrn/emotional/ms_realrec_emotional_headset_A2Y2RVQO2UVFV1_car_far_Amazed_fileid_8.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/dccrn/emotional/ms_realrec_emotional_headset_A1EK8YNHZHTW1J_Kitchen_Vessels_far_Surprised_fileid_10.wav" controls="" preload=""></audio></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SAF</td>
+      <td style="text-align: left"><audio src="samples/dp_dccrn/emotional/ms_realrec_emotional_earphone_A25UMKJS7PC293_clatter_near_amazed_fileid_6.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/dp_dccrn/emotional/ms_realrec_emotional_headset_A3KSAP865D3L7D_dog_barking_far_shouting_fileid_8.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/dp_dccrn/emotional/ms_realrec_emotional_headset_A2Y2RVQO2UVFV1_car_far_Amazed_fileid_8.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/dp_dccrn/emotional/ms_realrec_emotional_headset_A1EK8YNHZHTW1J_Kitchen_Vessels_far_Surprised_fileid_10.wav" controls="" preload=""></audio></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">S-DCCRN</td>
+      <td style="text-align: left"><audio src="samples/fdnet/emotional/ms_realrec_emotional_earphone_A25UMKJS7PC293_clatter_near_amazed_fileid_6.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/fdnet/emotional/ms_realrec_emotional_headset_A3KSAP865D3L7D_dog_barking_far_shouting_fileid_8.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/fdnet/emotional/ms_realrec_emotional_headset_A2Y2RVQO2UVFV1_car_far_Amazed_fileid_8.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/fdnet/emotional/ms_realrec_emotional_headset_A1EK8YNHZHTW1J_Kitchen_Vessels_far_Surprised_fileid_10.wav" controls="" preload=""></audio></td>
+    </tr>
+  </tbody>
+</table>
+<br><br>
+
+<h2>4. Demos -- DNS-2021 blind test (real recordings)<a name="realrec"></a></h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Models</strong></th>
+      <th style="text-align: center"><strong>Sample 1</strong></th>
+      <th style="text-align: center"><strong>Sample 2</strong></th>
+      <th style="text-align: center"><strong>Sample 3</strong></th>
+      <th style="text-align: center"><strong>Sample 4</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Noisy</td>
+      <td style="text-align: left"><audio src="samples/noisy/realrec/3.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/noisy/realrec/4.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/noisy/realrec/2.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/noisy/realrec/5.wav" controls="" preload=""></audio></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">RNNoise</td>
+
+      <td style="text-align: left"><audio src="samples/rnnoise/realrec/3.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/rnnoise/realrec/4.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/rnnoise/realrec/2.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/rnnoise/realrec/5.wav" controls="" preload=""></audio></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">DCCRN</td>
+      <td style="text-align: left"><audio src="samples/dccrn/realrec/3.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/dccrn/realrec/4.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/dccrn/realrec/2.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/dccrn/realrec/5.wav" controls="" preload=""></audio></td>
+
+    </tr>
+    <tr>
+      <td style="text-align: left">SAF</td>
+
+      <td style="text-align: left"><audio src="samples/dp_dccrn/realrec/3.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/dp_dccrn/realrec/4.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/dp_dccrn/realrec/2.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/dp_dccrn/realrec/5.wav" controls="" preload=""></audio></td>
+
+
+
+    </tr>
+    <tr>
+      <td style="text-align: left">S-DCCRN</td>
+
+      <td style="text-align: left"><audio src="samples/fdnet/realrec/3.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/fdnet/realrec/4.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/fdnet/realrec/2.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/fdnet/realrec/5.wav" controls="" preload=""></audio></td>
+    </tr>
+  </tbody>
+</table>
+
+</table>
+      <footer class="site-footer">
+        
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com/">GitHub Pages</a>.</span>
+      </footer>
+    </section>
+
+</body></html>
